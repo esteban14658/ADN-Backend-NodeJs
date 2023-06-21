@@ -1,0 +1,35 @@
+plantillas:
+   - nombre: /package.json
+     items:
+       - fuente: ${dependenciaBaseDatos}
+         objetivo: dependenciaBaseDatos
+       - fuente: ${versionDependenciaBaseDatos}
+         objetivo: versionDependenciaBaseDatos
+   - nombre: /env/development.env
+     items:
+       - fuente: ${tipoBaseDatos}
+         objetivo: tipoBaseDatos
+       - fuente: ${host}
+         objetivo: host
+       - fuente: ${puerto}
+         objetivo: puerto
+       - fuente: ${username}
+         objetivo: username
+       - fuente: ${password}
+         objetivo: password
+       - fuente: ${baseDatos}
+         objetivo: baseDatos
+   - nombre: /env/production.env
+     items:
+       - fuente: ${tipoBaseDatos}
+         objetivo: tipoBaseDatos
+       - fuente: ${host}
+         objetivo: host
+       - fuente: ${puerto}
+         objetivo: puerto
+       - fuente: ${username}
+         objetivo: username
+       - fuente: ${password}
+         objetivo: password
+       - fuente: ${baseDatos}
+         objetivo: baseDatos

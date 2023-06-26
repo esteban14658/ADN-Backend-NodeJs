@@ -7,6 +7,7 @@ import { AppLogger } from './configuracion/ceiba-logger.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NodeEnv } from './configuracion/environment/env-node.enum';
 import { databaseConfigFactory } from './configuracion/database.config';
+import { ClienteModule } from './cliente/cliente.module';
 
 @Module({
   providers: [AppLogger],
@@ -25,7 +26,7 @@ import { databaseConfigFactory } from './configuracion/database.config';
       }),
     }),
     UsuarioModule,
-//        CanchasModule,
+    ClienteModule,
   ],
 })
 export class InfraestructuraModule {

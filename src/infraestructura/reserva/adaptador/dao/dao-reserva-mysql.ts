@@ -1,8 +1,8 @@
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { DaoReserva } from '../../proveedor/dao/dao-reserva';
 import { ReservaDto } from 'src/aplicacion/reserva/consulta/dto/reserva.dto';
+import { DaoReserva } from 'src/dominio/reserva/puerto/dao/dao-reserva';
 
 
 @Injectable()

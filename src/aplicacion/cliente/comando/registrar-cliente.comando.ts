@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsNumberString, IsString } from "class-validator";
 
 export class ComandoRegistrarCliente {
-    @IsNumberString()
+    @IsString()
     @ApiProperty({ example: '20798887'})
     public cedula: string;
 

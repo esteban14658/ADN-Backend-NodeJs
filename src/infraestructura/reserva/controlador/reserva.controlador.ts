@@ -10,7 +10,7 @@ export class ReservaControlador {
                 private _manejadorListarReserva: ManejadorListarReserva) { }
     
     @Post()
-    @UsePipes(new ValidationPipe({ transform: true }))
+//    @UsePipes(new ValidationPipe({ transform: true }))
     async crear(@Body() comandoRegistrarReserva: ComandoRegistrarReserva) {
         await this._manejadorRegistrarReserva.ejecutar(comandoRegistrarReserva);
     }

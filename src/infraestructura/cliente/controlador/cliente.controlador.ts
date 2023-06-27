@@ -8,7 +8,7 @@ import { ManejadorListarCliente } from "src/aplicacion/cliente/consulta/listar-c
 export class ClienteControlador {
     constructor(
         private readonly _manejadorRegistrarCliente: ManejadorRegistrarCliente,
-        private readonly _manejadorListarClente: ManejadorListarCliente
+        private readonly _manejadorListarCliente: ManejadorListarCliente
     ) {}
 
     @Post()
@@ -19,6 +19,6 @@ export class ClienteControlador {
 
     @Get()
     async listar(): Promise<ClienteDto[]>{
-        return this._manejadorListarClente.ejecutar();
+        return this._manejadorListarCliente.ejecutar();
     }
 }

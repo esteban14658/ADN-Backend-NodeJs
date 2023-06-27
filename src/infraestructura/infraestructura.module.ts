@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NodeEnv } from './configuracion/environment/env-node.enum';
 import { databaseConfigFactory } from './configuracion/database.config';
 import { ClienteModule } from './cliente/cliente.module';
+import { ReservaModule } from './reserva/reserva.module';
 
 @Module({
   providers: [AppLogger],
@@ -27,6 +28,7 @@ import { ClienteModule } from './cliente/cliente.module';
     }),
     UsuarioModule,
     ClienteModule,
+    ReservaModule
   ],
 })
 export class InfraestructuraModule {

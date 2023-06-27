@@ -9,15 +9,19 @@ import { daoReservaProvider } from "./dao/dao-reserva.proveedor";
 import { ManejadorRegistrarReserva } from "src/aplicacion/reserva/comando/registrar-reserva.manejador";
 import { ManejadorListarReserva } from "src/aplicacion/reserva/consulta/listar-reservas.manejador";
 import { DaoReserva } from "src/dominio/reserva/puerto/dao/dao-reserva";
+import { ClienteProveedorModule } from "src/infraestructura/cliente/proveedor/cliente-proveedor.module";
+import { DaoClienteMysql } from "src/infraestructura/cliente/adaptador/dao/dao-cliente-mysql";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ReservaEntidad])],
+    imports: [TypeOrmModule.forFeature([ReservaEntidad]),
+            ClienteProveedorModule],
     providers: [
         { provide: ServicioRegistrarReserva, inject: [RepositorioReserva], useFactory: servicioRegistrarReservaProveedor },
         repositorioReservaProvider,
         daoReservaProvider,
         ManejadorRegistrarReserva,
         ManejadorListarReserva,
+        DaoClienteMysql,
     ],
     exports: [
         ServicioRegistrarReserva,

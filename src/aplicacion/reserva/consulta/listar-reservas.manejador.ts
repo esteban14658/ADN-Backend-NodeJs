@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { DaoReserva } from "src/infraestructura/reserva/proveedor/dao/dao-reserva";
 import { ReservaDto } from "./dto/reserva.dto";
+import { DaoReserva } from "src/dominio/reserva/puerto/dao/dao-reserva";
 
 @Injectable()
 export class ManejadorListarReserva {

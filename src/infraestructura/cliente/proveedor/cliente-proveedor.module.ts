@@ -9,6 +9,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ServicioRegistrarCliente } from "src/dominio/cliente/servicio/servicio-registrar-cliente";
 import { DaoCliente } from "src/dominio/cliente/puerto/dao/dao-cliente";
 import { repositorioClienteProvider } from "./repositorio/repositorio-cliente.proveedor";
+import { DaoClienteMysql } from "../adaptador/dao/dao-cliente-mysql";
 
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteEntidad])],
@@ -18,6 +19,7 @@ import { repositorioClienteProvider } from "./repositorio/repositorio-cliente.pr
         daoClienteProvider,
         ManejadorRegistrarCliente,
         ManejadorListarCliente,
+        DaoClienteMysql,
     ],
     exports: [
         ServicioRegistrarCliente,
@@ -25,6 +27,7 @@ import { repositorioClienteProvider } from "./repositorio/repositorio-cliente.pr
         ManejadorListarCliente,
         RepositorioCliente,
         DaoCliente,
+        DaoClienteMysql,
     ],
     })
     export class ClienteProveedorModule { }

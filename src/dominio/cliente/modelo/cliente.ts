@@ -18,7 +18,7 @@ export class Cliente {
     }
 
     private validarTamanoCedula(cedula: string){
-        if (cedula.length < NUMERO_MINIMO_CARACTERES_CEDULA || cedula.length > Numero_MAXIMO_CARACTERES_CEDULA){
+        if (cedula.length <= NUMERO_MINIMO_CARACTERES_CEDULA || cedula.length >= Numero_MAXIMO_CARACTERES_CEDULA){
             throw new ErrorLongitudInvalida(
                 `El tamaño de la cedula debe tener entre ${NUMERO_MINIMO_CARACTERES_CEDULA} 
                 y ${Numero_MAXIMO_CARACTERES_CEDULA} caracteres`,

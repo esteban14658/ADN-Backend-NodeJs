@@ -8,7 +8,7 @@ export class Reserva {
     readonly #cliente: Cliente;
 
     constructor(fechaInicio: Date, fechaFin: Date, cliente: Cliente) {
-        this.#fechaInicio = fechaFin;
+        this.#fechaInicio = fechaInicio;
         this.#fechaFin = fechaFin;
         this.#cliente = cliente;
     }

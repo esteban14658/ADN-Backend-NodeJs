@@ -25,7 +25,6 @@ async function bootstrap() {
   SwaggerModule.setup('/api/doc', app, swaggerDocument);
 
   app.setGlobalPrefix(configService.get(EnvVariables.APPLICATION_CONTEXT_PATH));
-//  await app.listen(configService.get(EnvVariables.APPLICATION_PORT));
-  await app.listen(3000);
+  await app.listen(configService.get(EnvVariables.APPLICATION_PORT));
 }
 bootstrap();

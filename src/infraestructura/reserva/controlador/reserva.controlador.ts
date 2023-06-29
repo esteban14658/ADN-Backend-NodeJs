@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Post, Get, UsePipes, ValidationPipe, Param } from "@nestjs/common";
 import { ComandoRegistrarReserva } from "src/aplicacion/reserva/comando/registrar-reserva.comando";
 import { ManejadorRegistrarReserva } from "src/aplicacion/reserva/comando/registrar-reserva.manejador";
 import { ReservaDto } from "src/aplicacion/reserva/consulta/dto/reserva.dto";
@@ -11,8 +11,8 @@ export class ReservaControlador {
     
     @Post()
     @UsePipes(new ValidationPipe({ transform: true }))
-    async crear(@Body() comandoRegistrarReserva: ComandoRegistrarReserva) {
-        await this._manejadorRegistrarReserva.ejecutar(comandoRegistrarReserva);
+    async crear(@Body() comandoRegistrarReserva: ComandoRegistrarReserva, @Param() horas: number) {
+        await this._manejadorRegistrarReserva.ejecutar(comandoRegistrarReserva, horas);
     }
 
     @Get()

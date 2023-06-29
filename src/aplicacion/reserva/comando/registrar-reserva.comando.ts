@@ -8,10 +8,6 @@ export class ComandoRegistrarReserva {
     @ApiProperty({ example: new Date().toISOString })
     fechaInicio: Date;
 
-    @IsDate()
-    @ApiProperty({ example: new Date().setHours(new Date().getHours() + 1) })
-    fechaFin: Date;
-
     @IsObject()
     @ApiProperty({ example: { id: 1,
         cedula: '20798887',

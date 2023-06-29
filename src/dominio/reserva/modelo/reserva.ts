@@ -1,10 +1,9 @@
 import { Cliente } from "src/dominio/cliente/modelo/cliente";
-import { ErrorDeNegocio } from "src/dominio/errores/error-de-negocio";
 import { ErrorFechaReserva } from "src/dominio/errores/error-fecha-reserva";
 
 export class Reserva {
     readonly #fechaInicio: Date;
-    readonly #fechaFin: Date;
+    #fechaFin: Date;
     readonly #cliente: Cliente;
 
     constructor(fechaInicio: Date, fechaFin: Date, cliente: Cliente) {
@@ -27,6 +26,10 @@ export class Reserva {
 
     get fechaFin(): Date {
         return this.#fechaFin;
+    }
+
+    set fechaFin(fechaFin: Date){
+        this.#fechaFin = fechaFin;
     }
 
     get cliente(): Cliente {

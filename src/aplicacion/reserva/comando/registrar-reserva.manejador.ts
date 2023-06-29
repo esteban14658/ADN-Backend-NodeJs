@@ -8,11 +8,11 @@ import { Cliente } from "src/dominio/cliente/modelo/cliente";
 export class ManejadorRegistrarReserva {
     constructor(private _servicioRegistrarReserva: ServicioRegistrarReserva) {}
     
-    async ejecutar(comandoRegistrarReserva: ComandoRegistrarReserva){
+    async ejecutar(comandoRegistrarReserva: ComandoRegistrarReserva, horas: number){
         await this._servicioRegistrarReserva.ejecutar(
             new Reserva(
                 comandoRegistrarReserva.fechaInicio,
-                comandoRegistrarReserva.fechaFin,
+                new Date(),
                 new Cliente(
                     comandoRegistrarReserva.cliente.cedula,
                     comandoRegistrarReserva.cliente.nombre,
@@ -20,7 +20,7 @@ export class ManejadorRegistrarReserva {
                     comandoRegistrarReserva.cliente.telefono,
                     comandoRegistrarReserva.cliente.email
                 )
-            )
+            ), horas
         );
     }
 }

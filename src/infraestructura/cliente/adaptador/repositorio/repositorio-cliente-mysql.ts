@@ -20,5 +20,5 @@ export class RepositorioClienteMysql implements RepositorioCliente{
         entidad.telefono = cliente.telefono;
         entidad.email = cliente.email;
         await this.repositorio.save(entidad);
-        }
+    }
 }

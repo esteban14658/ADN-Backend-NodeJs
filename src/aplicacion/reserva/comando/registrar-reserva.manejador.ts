@@ -11,7 +11,7 @@ export class ManejadorRegistrarReserva {
     async ejecutar(comandoRegistrarReserva: ComandoRegistrarReserva, horas: number){
         await this._servicioRegistrarReserva.ejecutar(
             new Reserva(
-                comandoRegistrarReserva.fechaInicio,
+                new Date(comandoRegistrarReserva.fechaInicio),
                 new Date(),
                 new Cliente(
                     comandoRegistrarReserva.cliente.cedula,

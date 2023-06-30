@@ -23,4 +23,8 @@ export class ClienteEntidad{
 
     @OneToMany(() => ReservaEntidad, (reserva) => reserva.cliente)
     reservas: ReservaEntidad[];
+
+    set setId(id: number) {
+        this.id = id;
+    }
 }

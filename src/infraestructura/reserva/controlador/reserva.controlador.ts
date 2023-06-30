@@ -9,14 +9,19 @@ export class ReservaControlador {
     constructor(private _manejadorRegistrarReserva: ManejadorRegistrarReserva, 
                 private _manejadorListarReserva: ManejadorListarReserva) { }
     
-    @Post()
-    @UsePipes(new ValidationPipe({ transform: true }))
-    async crear(@Body() comandoRegistrarReserva: ComandoRegistrarReserva, @Param() horas: number) {
+    @Post('/:horas')
+//    @UsePipes(new ValidationPipe({ transform: true }))
+    async crear(@Body() comandoRegistrarReserva: ComandoRegistrarReserva, @Param('horas') horas: number) {
         await this._manejadorRegistrarReserva.ejecutar(comandoRegistrarReserva, horas);
     }
 
     @Get()
     async listar(): Promise<ReservaDto[]>{
         return this._manejadorListarReserva.ejecutar();
+    }
+
+    @Get('/fecha')
+    async devolver(): Promise<Date>{
+        return new Date();
     }
 }

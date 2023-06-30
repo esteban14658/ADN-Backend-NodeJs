@@ -1,12 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsObject } from "class-validator";
+import { IsDate, IsObject, IsString } from "class-validator";
 import { ClienteDto } from "src/aplicacion/cliente/consulta/dto/cliente.dto";
 
 export class ComandoRegistrarReserva {
 
-    @IsDate()
+    @IsString()
     @ApiProperty({ example: new Date().toISOString })
-    fechaInicio: Date;
+    fechaInicio: string;
 
     @IsObject()
     @ApiProperty({ example: { id: 1,

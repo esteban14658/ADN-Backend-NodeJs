@@ -20,13 +20,10 @@ export class DaoClienteMysql implements DaoCliente {
     );
   }
 
-  async consultarCliente(cedula: string): Promise<ClienteEntidad>{
-      const query = `
-      SELECT c.*
-      FROM CLIENTE c
-      WHERE c.cedula = $1
-    `;
-    const cliente = await this.entityManager.query(query, [cedula]);
-    return plainToClass(ClienteEntidad, cliente[0]);
+  async consultarCliente(_cedula: string): Promise<ClienteEntidad> {
+    console.log('[impresion cedula]' + _cedula);
+    const cliente = await this.entityManager.findOne(ClienteEntidad, { where: { cedula: _cedula } });
+    console.log('[Cliente]: ' + cliente);
+    return plainToClass(ClienteEntidad, cliente);
   }
 }

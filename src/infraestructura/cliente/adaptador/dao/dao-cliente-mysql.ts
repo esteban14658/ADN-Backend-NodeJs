@@ -21,9 +21,7 @@ export class DaoClienteMysql implements DaoCliente {
   }
 
   async consultarCliente(_cedula: string): Promise<ClienteEntidad> {
-    console.log('[impresion cedula]' + _cedula);
     const cliente = await this.entityManager.findOne(ClienteEntidad, { where: { cedula: _cedula } });
-    console.log('[Cliente]: ' + cliente);
     return plainToClass(ClienteEntidad, cliente);
   }
 }

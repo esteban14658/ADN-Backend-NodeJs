@@ -10,20 +10,27 @@ import { ServicioRegistrarCliente } from "src/dominio/cliente/servicio/servicio-
 import { DaoCliente } from "src/dominio/cliente/puerto/dao/dao-cliente";
 import { repositorioClienteProvider } from "./repositorio/repositorio-cliente.proveedor";
 import { DaoClienteMysql } from "../adaptador/dao/dao-cliente-mysql";
+import { ManejadorActualizarCliente } from "src/aplicacion/cliente/comando/actualizar-cliente.manejador";
+import { ServicioActualizarCliente } from "src/dominio/cliente/servicio/servicio-actualizar-cliente";
+import { servicioActualizarClienteProveedor } from "./servicio/servicio-actualizar-cliente-proveedor";
 
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteEntidad])],
     providers: [
         { provide: ServicioRegistrarCliente, inject: [RepositorioCliente], useFactory: servicioRegistrarClienteProveedor },
+        { provide: ServicioActualizarCliente, inject: [RepositorioCliente], useFactory: servicioActualizarClienteProveedor },
         repositorioClienteProvider,
         daoClienteProvider,
         ManejadorRegistrarCliente,
         ManejadorListarCliente,
+        ManejadorActualizarCliente,
         DaoClienteMysql,
     ],
     exports: [
         ServicioRegistrarCliente,
+        ServicioActualizarCliente, 
         ManejadorRegistrarCliente,
+        ManejadorActualizarCliente,
         ManejadorListarCliente,
         RepositorioCliente,
         DaoCliente,

@@ -1,6 +1,5 @@
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-import { DaoUsuario } from 'src/dominio/usuario/puerto/dao/dao-usuario';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
 import { createSandbox, SinonStubbedInstance } from 'sinon';
@@ -24,7 +23,7 @@ describe('Pruebas al controlador de reservas', () => {
 
     beforeAll(async () => {
         repositorioReserva = createStubObj<RepositorioReserva>(['guardar'], sinonSandbox);
-        daoReserva = createStubObj<DaoReserva>(['listar'], sinonSandbox);
+        daoReserva = createStubObj<DaoReserva>(['listar', 'existeReserva'], sinonSandbox);
 
         const moduleRef = await Test.createTestingModule({
             controllers: [ReservaControlador],
@@ -36,7 +35,7 @@ describe('Pruebas al controlador de reservas', () => {
             useFactory: servicioRegistrarReservaProveedor,
             },
             { provide: RepositorioReserva, useValue: repositorioReserva },
-            { provide: DaoUsuario, useValue: daoReserva },
+            { provide: DaoReserva, useValue: daoReserva },
             ManejadorRegistrarReserva,
             ManejadorListarReserva,
             ],

@@ -1,5 +1,5 @@
 import { Reserva } from "../../modelo/reserva";
 
 export abstract class RepositorioReserva {
-    abstract guardarNativo(reserva: Reserva);
+    abstract guardar(reserva: Reserva);
 }

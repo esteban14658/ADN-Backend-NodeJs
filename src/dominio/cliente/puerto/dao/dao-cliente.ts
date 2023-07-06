@@ -4,4 +4,5 @@ import { ClienteEntidad } from "src/infraestructura/cliente/entidad/cliente.enti
 export abstract class DaoCliente {
     abstract listar(): Promise<ClienteDto[]>;
     abstract consultarCliente(cedula: string): Promise<ClienteEntidad>;
+    abstract existeCliente(cedula: string): Promise<Boolean>;
 }

@@ -13,7 +13,7 @@ export class RepositorioReservaMysql implements RepositorioReserva{
         private readonly entityManager: EntityManager
     ) {}
 
-    async guardarNativo(reserva: Reserva){
+    async guardar(reserva: Reserva){
         const idCliente = (await this.daoCliente.consultarCliente(reserva.cliente.cedula)).id;
         await this.entityManager.query("INSERT INTO RESERVA (fechaInicio, fechaFin, clienteId) VALUES (?, ?, ?)", 
                                 [reserva.fechaInicio, reserva.fechaFin, idCliente]);

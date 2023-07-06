@@ -11,7 +11,7 @@ export class ServicioRegistrarReserva {
     async ejecutar(reserva: Reserva, horas: number){
         reserva.fechaFin = this.sumarHoras(reserva.fechaInicio, horas);
         await this.existeReservaFuncion(reserva.fechaInicio, reserva.fechaFin);
-        await this._repositorioReserva.guardarNativo(reserva);
+        await this._repositorioReserva.guardar(reserva);
     }
 
     private sumarHoras(fechaInicio: Date, horas: number): Date {

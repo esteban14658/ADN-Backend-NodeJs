@@ -24,4 +24,9 @@ export class DaoClienteMysql implements DaoCliente {
     const cliente = await this.entityManager.findOne(ClienteEntidad, { where: { cedula: _cedula } });
     return plainToClass(ClienteEntidad, cliente);
   }
+
+  async existeCliente(_cedula: string): Promise<Boolean> {
+    const contarClientes = await this.entityManager.count(ClienteEntidad, { where: { cedula: _cedula } });
+    return contarClientes > 0;
+  }
 }

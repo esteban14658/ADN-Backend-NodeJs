@@ -18,14 +18,15 @@ describe('ServicioRegistrarReserva', () => {
         servicioRegistrarReserva = new ServicioRegistrarReserva(repositorioReservaStub, daoReservaStub);
     });
 
-    it('si la cedula no existe guarda el Reserva en el repositorio', async () => {
-        const cliente = new Cliente('1234567', 'Juan', 'Perez', '3205514645', 'juan.10@gmail.com');
+    it('si la reserva no existe, guarda el Reserva en el repositorio', async () => {
+        const cliente = new Cliente('1234568', 'Juan', 'Perez', '3205514645', 'juan.10@gmail.com');
         const horas = 2;
         const reserva = new Reserva(new Date(), new Date(), cliente);
-    
+        
+        await daoReservaStub.existeReserva.returns(Promise.resolve(false));
         await servicioRegistrarReserva.ejecutar(reserva, horas);
     
         expect(repositorioReservaStub.guardar.getCalls().length).toBe(1);
-        expect(repositorioReservaStub.guardar.calledWith(Reserva)).toBeTruthy();
+        expect(repositorioReservaStub.guardar.calledWith(reserva)).toBeTruthy();
     });
 });

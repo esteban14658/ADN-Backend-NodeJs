@@ -10,20 +10,20 @@ export class Cliente {
     readonly #email: string;
 
     constructor(cedula: string, nombre: string, apellidos: string, telefono: string, email: string) {
-        this.#cedula = cedula;
+        this.#cedula = this.validarTamanoCedula(cedula);
         this.#nombre = nombre;
         this.#apellidos = apellidos;
         this.#telefono = telefono;
         this.#email = email;
     }
 
-    private validarTamanoCedula(cedula: string){
+    private validarTamanoCedula(cedula: string): string{
         if (cedula.length <= NUMERO_MINIMO_CARACTERES_CEDULA || cedula.length >= Numero_MAXIMO_CARACTERES_CEDULA){
             throw new ErrorLongitudInvalida(
-                `El tamaño de la cedula debe tener entre ${NUMERO_MINIMO_CARACTERES_CEDULA} 
-                y ${Numero_MAXIMO_CARACTERES_CEDULA} caracteres`,
+                'El tamaño de la cedula debe tener entre 6 y 10 caracteres',
             )
         }
+        return cedula;
     }
 
     get cedula(): string{

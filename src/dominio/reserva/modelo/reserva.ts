@@ -12,14 +12,6 @@ export class Reserva {
         this.#cliente = cliente;
     }
 
-    private validarFecha(fechaInicio: Date, fechaFin: Date){
-        if (fechaInicio > fechaFin){
-            throw new ErrorFechaReserva(
-                `La fecha de inicio debe ser menor a la fecha fin de la reserva`,
-            )
-        }
-    }
-
     get fechaInicio(): Date {
         return this.#fechaInicio;
     }

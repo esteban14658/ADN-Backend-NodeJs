@@ -19,7 +19,7 @@ import { ManejadorConsultarExistenciaCliente } from "src/aplicacion/cliente/cons
     imports: [TypeOrmModule.forFeature([ClienteEntidad])],
     providers: [
         { provide: ServicioRegistrarCliente, inject: [RepositorioCliente], useFactory: servicioRegistrarClienteProveedor },
-        { provide: ServicioActualizarCliente, inject: [RepositorioCliente], useFactory: servicioActualizarClienteProveedor },
+        { provide: ServicioActualizarCliente, inject: [RepositorioCliente, DaoCliente], useFactory: servicioActualizarClienteProveedor },
         repositorioClienteProvider,
         daoClienteProvider,
         ManejadorRegistrarCliente,

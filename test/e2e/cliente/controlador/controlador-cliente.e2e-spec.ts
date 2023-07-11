@@ -32,8 +32,8 @@ describe('Pruebas al controlador de clientes', () => {
     let daoCliente: SinonStubbedInstance<DaoCliente>;
 
     beforeAll(async () => {
-        repositorioCliente = createStubObj<RepositorioCliente>(['guardar', 'actualizar']);
-        daoCliente = createStubObj<DaoCliente>(['listar', 'consultarCliente', 'existeCliente']);
+        repositorioCliente = createStubObj<RepositorioCliente>(['guardar', 'actualizar'], sinonSandbox);
+        daoCliente = createStubObj<DaoCliente>(['listar', 'consultarCliente', 'existeCliente'], sinonSandbox);
         const moduleRef = await Test.createTestingModule({
             controllers: [ClienteControlador],
             providers: [
@@ -45,7 +45,7 @@ describe('Pruebas al controlador de clientes', () => {
                 },
                 {
                     provide: ServicioActualizarCliente,
-                    inject: [RepositorioCliente],
+                    inject: [RepositorioCliente, DaoCliente],
                     useFactory: servicioActualizarClienteProveedor
                 },
                 { provide: RepositorioCliente, useValue: repositorioCliente },
@@ -100,11 +100,29 @@ describe('Pruebas al controlador de clientes', () => {
         const mensaje = 'El tamaño de la cedula debe tener entre 6 y 10 caracteres';
 
         const response = await request(app.getHttpServer())
-        .post('/clientes').send(cliente)
-        .expect(HttpStatus.BAD_REQUEST);
+            .post('/clientes').send(cliente)
+            .expect(HttpStatus.BAD_REQUEST);
         expect(response.body.message).toBe(mensaje);
         expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
     });
 
-    
+    it('deberia fallar al intentar actualizar un cliente que no existe', async () => {
+        const id = 10;
+        const cliente: ComandoRegistrarCliente = {
+            cedula: '987876352',
+            nombre: 'Daniel',
+            apellidos: 'Acosta',
+            telefono: '3008276262',
+            email: 'acosta.1@gmail.com'
+        };
+
+        const mensaje = 'No se encuentra registrado el cliente con dicha cedula';
+        daoCliente.existeCliente.returns(Promise.resolve(false));
+
+        const response = await request(app.getHttpServer())
+            .put(`/clientes/${id}`).send(cliente)
+            .expect(HttpStatus.BAD_REQUEST);
+        expect(response.body.message).toBe(mensaje);
+        expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+    });
 });

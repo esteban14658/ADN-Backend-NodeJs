@@ -12,6 +12,8 @@ import { servicioRegistrarReservaProveedor } from 'src/infraestructura/reserva/p
 import { ManejadorRegistrarReserva } from 'src/aplicacion/reserva/comando/registrar-reserva.manejador';
 import { ManejadorListarReserva } from 'src/aplicacion/reserva/consulta/listar-reservas.manejador';
 import { FiltroExcepcionesDeNegocio } from 'src/infraestructura/excepciones/filtro-excepciones-negocio';
+import { ComandoRegistrarCliente } from 'src/aplicacion/cliente/comando/registrar-cliente.comando';
+import { ComandoRegistrarReserva } from 'src/aplicacion/reserva/comando/registrar-reserva.comando';
 
 const sinonSandbox = createSandbox();
 
@@ -73,5 +75,31 @@ describe('Pruebas al controlador de reservas', () => {
             .get('/reservas')
             .expect(HttpStatus.OK)
             .expect(reservas);
+    });
+
+    it('debería fallar al registar un usuario ya existente', async () => {
+        const cliente: ComandoRegistrarCliente = {
+            cedula: '1234567',
+            nombre: 'Juan',
+            apellidos: 'Perez',
+            telefono: '3205514645',
+            email: 'juan.10@gmail.com'
+        }
+
+        const reserva: ComandoRegistrarReserva = {
+            fechaInicio: (new Date()).toISOString(),
+            cliente: cliente
+        }
+
+        const horas = 2;
+
+        const mensaje = 'La fecha que selecciono ya se encuentra reservada';
+        daoReserva.existeReserva.returns(Promise.resolve(true));
+    
+        const response = await request(app.getHttpServer())
+            .post(`/reservas/${horas}`).send(reserva)
+            .expect(HttpStatus.BAD_REQUEST);
+        expect(response.body.message).toBe(mensaje);
+        expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
     });
 });

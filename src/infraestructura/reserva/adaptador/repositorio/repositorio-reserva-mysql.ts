@@ -18,4 +18,8 @@ export class RepositorioReservaMysql implements RepositorioReserva{
         await this.entityManager.query("INSERT INTO RESERVA (fechaInicio, fechaFin, clienteId) VALUES (?, ?, ?)", 
                                 [reserva.fechaInicio, reserva.fechaFin, idCliente]);
     }
+
+    async eliminar(id: number) {
+        await this.entityManager.query("DELETE FROM RESERVA WHERE id = ?", [id]);
+    }
 }

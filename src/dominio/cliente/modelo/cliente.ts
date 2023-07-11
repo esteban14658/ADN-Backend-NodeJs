@@ -1,7 +1,7 @@
 import { ErrorLongitudInvalida } from 'src/dominio/errores/error-longitud-invalida';
 
-const NUMERO_MINIMO_CARACTERES_CEDULA = 6;
-const Numero_MAXIMO_CARACTERES_CEDULA = 10;
+const NUMERO_MINIMO_CARACTERES_CEDULA = 5;
+const Numero_MAXIMO_CARACTERES_CEDULA = 11;
 export class Cliente {
     readonly #cedula: string;
     readonly #nombre: string;

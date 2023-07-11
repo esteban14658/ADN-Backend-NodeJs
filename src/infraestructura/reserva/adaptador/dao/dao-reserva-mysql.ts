@@ -28,4 +28,15 @@ export class DaoReservaMysql implements DaoReserva {
         const count = parseInt(resultado[0]['COUNT(*)']);
         return count > 0;
     }
+
+    async existeReservaPorId(id: number): Promise<Boolean> {
+        const resultado = await this.entityManager.query(
+            `SELECT COUNT(*)
+            FROM RESERVA
+            WHERE id = ?`,
+            [id]
+        )
+        const count = parseInt(resultado[0]['COUNT(*)']);
+        return count > 0;
+    }
 }

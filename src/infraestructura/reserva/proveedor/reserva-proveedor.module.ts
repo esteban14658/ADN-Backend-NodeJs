@@ -12,17 +12,24 @@ import { DaoReserva } from "src/dominio/reserva/puerto/dao/dao-reserva";
 import { ClienteProveedorModule } from "src/infraestructura/cliente/proveedor/cliente-proveedor.module";
 import { DaoClienteMysql } from "src/infraestructura/cliente/adaptador/dao/dao-cliente-mysql";
 import { ManejadorConsultarExistenciaReserva } from "src/aplicacion/reserva/consulta/consultar-existencia-reservas.manejador";
+import { ServicioEliminarReserva } from "src/dominio/reserva/servicio/servicio-eliminar-reserva";
+import { servicioEliminarReservaProveedor } from "./servicio/servicio-eliminar-reserva.proveedor";
+import { ManejadorEliminarReserva } from "src/aplicacion/reserva/comando/eliminar-reserva.manejador";
+import { ManejadorConsultarExistenciaPorId } from "src/aplicacion/reserva/consulta/consultar-existencia-reserva-por-id.manejador";
 
 @Module({
     imports: [TypeOrmModule.forFeature([ReservaEntidad]),
             ClienteProveedorModule],
     providers: [
         { provide: ServicioRegistrarReserva, inject: [RepositorioReserva, DaoReserva], useFactory: servicioRegistrarReservaProveedor },
+        { provide: ServicioEliminarReserva, inject: [RepositorioReserva, DaoReserva], useFactory: servicioEliminarReservaProveedor },
         repositorioReservaProvider,
         daoReservaProvider,
         ManejadorRegistrarReserva,
         ManejadorListarReserva,
         ManejadorConsultarExistenciaReserva,
+        ManejadorConsultarExistenciaPorId,
+        ManejadorEliminarReserva,
         DaoClienteMysql,
     ],
     exports: [
@@ -30,6 +37,8 @@ import { ManejadorConsultarExistenciaReserva } from "src/aplicacion/reserva/cons
         ManejadorRegistrarReserva,
         ManejadorListarReserva,
         ManejadorConsultarExistenciaReserva,
+        ManejadorConsultarExistenciaPorId,
+        ManejadorEliminarReserva,
         RepositorioReserva,
         DaoReserva,
     ],

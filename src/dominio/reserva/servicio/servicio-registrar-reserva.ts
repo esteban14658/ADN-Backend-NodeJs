@@ -4,6 +4,8 @@ import { DaoReserva } from "../puerto/dao/dao-reserva";
 import { RepositorioReserva } from "../puerto/repositorio/repositorio-reserva";
 import * as moment from 'moment';
 
+const RESTAR_UN_SEGUNDO_A_LA_RESERVA = 1;
+
 export class ServicioRegistrarReserva {
     constructor(private _repositorioReserva: RepositorioReserva, 
                 private _daoReserva: DaoReserva) {}
@@ -17,7 +19,7 @@ export class ServicioRegistrarReserva {
     private sumarHoras(fechaInicio: Date, horas: number): Date {
         const fechaMoment = moment(fechaInicio);
         fechaMoment.add(horas, 'hours');
-        fechaMoment.subtract(1, 'seconds');
+        fechaMoment.subtract(RESTAR_UN_SEGUNDO_A_LA_RESERVA, 'seconds');
         return fechaMoment.toDate();
     }
 

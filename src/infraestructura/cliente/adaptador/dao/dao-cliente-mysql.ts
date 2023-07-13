@@ -29,4 +29,9 @@ export class DaoClienteMysql implements DaoCliente {
     const contarClientes = await this.entityManager.count(ClienteEntidad, { where: { cedula: _cedula } });
     return contarClientes > 0;
   }
+
+  async existeClientePorId(_id: number): Promise<Boolean> {
+    const contarClientes = await this.entityManager.count(ClienteEntidad, { where: { id: _id } });
+    return contarClientes > 0;
+  }
 }

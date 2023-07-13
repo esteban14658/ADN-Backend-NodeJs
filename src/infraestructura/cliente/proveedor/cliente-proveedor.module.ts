@@ -14,6 +14,7 @@ import { ManejadorActualizarCliente } from "src/aplicacion/cliente/comando/actua
 import { ServicioActualizarCliente } from "src/dominio/cliente/servicio/servicio-actualizar-cliente";
 import { servicioActualizarClienteProveedor } from "./servicio/servicio-actualizar-cliente-proveedor";
 import { ManejadorConsultarExistenciaCliente } from "src/aplicacion/cliente/consulta/consultar-existencia-cliente.manejador";
+import { ManejadorConsultarExistenciaClientePorId } from "src/aplicacion/cliente/consulta/consultar-existencia-cliente-por-id.manejador";
 
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteEntidad])],
@@ -26,6 +27,7 @@ import { ManejadorConsultarExistenciaCliente } from "src/aplicacion/cliente/cons
         ManejadorListarCliente,
         ManejadorActualizarCliente,
         ManejadorConsultarExistenciaCliente,
+        ManejadorConsultarExistenciaClientePorId,
         DaoClienteMysql,
     ],
     exports: [
@@ -35,6 +37,7 @@ import { ManejadorConsultarExistenciaCliente } from "src/aplicacion/cliente/cons
         ManejadorActualizarCliente,
         ManejadorListarCliente,
         ManejadorConsultarExistenciaCliente,
+        ManejadorConsultarExistenciaClientePorId,
         RepositorioCliente,
         DaoCliente,
         DaoClienteMysql,

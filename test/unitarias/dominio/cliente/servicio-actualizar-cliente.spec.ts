@@ -12,7 +12,7 @@ describe('ServicioActualizarCliente', () => {
 
     beforeEach(() => {
         repositorioClienteStub = createStubObj<RepositorioCliente>(['actualizar']);
-        daoClienteStub = createStubObj<DaoCliente>(['existeCliente']);
+        daoClienteStub = createStubObj<DaoCliente>(['existeClientePorId']);
         servicioActualizarCliente = new ServicioActualizarCliente(repositorioClienteStub, daoClienteStub);
     });
 
@@ -20,7 +20,7 @@ describe('ServicioActualizarCliente', () => {
         const cliente = new Cliente('1234567', 'Juan', 'Perez', '3205514645', 'juan.10@gmail.com');
         const idCliente = 1;
 
-        await daoClienteStub.existeCliente.returns(Promise.resolve(true)); 
+        await daoClienteStub.existeClientePorId.returns(Promise.resolve(true)); 
         await servicioActualizarCliente.ejecutar(cliente, idCliente);
 
         expect(repositorioClienteStub.actualizar.getCalls().length).toBe(1);

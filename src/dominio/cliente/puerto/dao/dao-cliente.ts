@@ -5,4 +5,5 @@ export abstract class DaoCliente {
     abstract listar(): Promise<ClienteDto[]>;
     abstract consultarCliente(cedula: string): Promise<ClienteEntidad>;
     abstract existeCliente(cedula: string): Promise<Boolean>;
+    abstract existeClientePorId(id: number): Promise<Boolean>;
 }

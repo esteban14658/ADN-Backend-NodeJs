@@ -33,7 +33,7 @@ describe('Pruebas al controlador de clientes', () => {
 
     beforeAll(async () => {
         repositorioCliente = createStubObj<RepositorioCliente>(['guardar', 'actualizar'], sinonSandbox);
-        daoCliente = createStubObj<DaoCliente>(['listar', 'consultarCliente', 'existeCliente'], sinonSandbox);
+        daoCliente = createStubObj<DaoCliente>(['listar', 'consultarCliente', 'existeCliente', 'existeClientePorId'], sinonSandbox);
         const moduleRef = await Test.createTestingModule({
             controllers: [ClienteControlador],
             providers: [
@@ -116,13 +116,13 @@ describe('Pruebas al controlador de clientes', () => {
             email: 'acosta.1@gmail.com'
         };
 
-        const mensaje = 'No se encuentra registrado el cliente con dicha cedula';
-        daoCliente.existeCliente.returns(Promise.resolve(false));
+        const mensaje = 'No se encuentra registrado el cliente con dicho id';
+        daoCliente.existeClientePorId.returns(Promise.resolve(false));
 
         const response = await request(app.getHttpServer())
             .put(`/clientes/${id}`).send(cliente)
-            .expect(HttpStatus.BAD_REQUEST);
+            .expect(HttpStatus.NOT_FOUND);
         expect(response.body.message).toBe(mensaje);
-        expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+        expect(response.body.statusCode).toBe(HttpStatus.NOT_FOUND);
     });
 });

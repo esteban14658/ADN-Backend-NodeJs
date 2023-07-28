@@ -13,6 +13,7 @@ export class ServicioRegistrarReserva {
     async ejecutar(reserva: Reserva, horas: number){
         reserva.fechaFin = this.sumarHoras(reserva.fechaInicio, horas);
         await this.existeReservaFuncion(reserva.fechaInicio, reserva.fechaFin);
+        await this.evitarReserva(reserva.fechaInicio, reserva.fechaFin);
         await this._repositorioReserva.guardar(reserva);
     }
 
@@ -29,6 +30,14 @@ export class ServicioRegistrarReserva {
             throw new ErrorDeNegocio(
                 'La fecha que selecciono ya se encuentra reservada'
             )
+        }
+    }
+
+    private async evitarReserva(fechaInicio: Date, fechaFin: Date) {
+        const fechaInicioColombia = new Date(fechaInicio.getTime() + 5 * 60 * 60 * 1000);
+        const fechaFinColombia = new Date(fechaFin.getTime() + 5 * 60 * 60 * 1000);
+        if (fechaInicioColombia.getHours() < 5 || fechaFinColombia.getHours() > 22) {
+            throw new ErrorDeNegocio('Horas fuera del rango permitido');
         }
     }
 }

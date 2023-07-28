@@ -19,6 +19,8 @@ export class FiltroExcepcionesDeNegocio implements ExceptionFilter {
   
     let statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
     let message: Message;
+    const timestamp = new Date();
+    timestamp.setHours(timestamp.getHours() - 5);
   
     if (exception instanceof ErrorDeNegocio) {
       statusCode = HttpStatus.BAD_REQUEST;
@@ -29,7 +31,7 @@ export class FiltroExcepcionesDeNegocio implements ExceptionFilter {
 
     message = {
       statusCode,
-      timestamp: new Date().toISOString(),
+      timestamp: timestamp.toISOString(),
       path: request.url,
       message: exception.message,
     };
